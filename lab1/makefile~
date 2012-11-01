@@ -1,9 +1,9 @@
 %.o: %.c
 	gcc -c -o $@ $<
 
-all: test
+all: invert
 
 clean:
 	rm -f *.o
-test: invert.o
+invert: invert.o
 	cc -o $@ $^ 

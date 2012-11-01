@@ -1,9 +1,9 @@
 %.o: %.c
 	gcc -c -o $@ $<
 
-all: invert
+all: encbc
 
 clean:
 	rm -f *.o
-invert: invert.o
+encbc: encbc.o
 	cc -o $@ $^ 

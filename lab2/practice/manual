@@ -1,0 +1,12 @@
+NAME
+    fortune - print random line
+ 
+SYNOPSIS
+    fortune FILE
+ 
+DESCRIPTION
+    Print a random line from the FILE on the standard output.
+ 
+BUGS
+    If the fortune file contains empty lines, the empty lines will
+    sometimes be printed. 

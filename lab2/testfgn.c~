@@ -1,0 +1,62 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include "fgetname.h"
+
+int main(int argc, char **argv) {
+	FILE *stream = fopen("test.txt", "r");
+	char name[64];
+	if(!stream) {
+		fprintf(stderr, "run the test in the source directory\n");
+		return 1;
+	}
+
+	while(fgetname(name, sizeof(name), stream))
+		printf("%s ", name);
+
+	printf("\n");
+	fclose(stream);
+
+	return 0;
+	
+	
+/*
+    auto
+    break
+    case
+    char
+    const
+    continue
+    default
+    do
+    double
+    else
+    enum
+    extern
+    float
+    for
+    goto
+    if
+    int
+    long
+    register
+    return
+    short
+    signed
+    sizeof
+    static
+    struct
+    return
+    switch
+    typedef
+    typedef
+    unsigned
+    void
+    volatile
+    while
+*/
+
+
+}
+
+	
+
