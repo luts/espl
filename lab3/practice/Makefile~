@@ -1,0 +1,14 @@
+%.o: %.c
+	gcc -c -o $@ $<
+ 
+all: test
+ 
+clean:
+	rm -f *.o
+ 
+test.o: test.c
+	gcc -c -o test.o test.c
+
+tests: test.o 
+	gcc -o test test.o 
+
