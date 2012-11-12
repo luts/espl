@@ -5,8 +5,33 @@
 #include "diff.h"
 
 int main(int argc, char **argv) {
-      FILE *file_differences = fopen( "differences.txt", "r");
-      FILE *file1 = fopen( "file1.txt", "r+");
+      int print = 0;
+      while (1) {
+	      char c;
+	      c = getopt (argc, argv, "hrm\n");
+	      if (c == -1) {
+		  break;
+	      }
+	      switch (c) {
+	      case 'h':
+		  printf ("OPTIONS\n");
+		  printf ("-h  print a summary of options and exit\n");
+		  printf ("-r  reverse the differences\n");
+		  printf ("-m  print a message each time a change is applied\n");
+		  break;
+	      case 'r':
+		  break;
+	      case 'm':
+		  print = 1;
+		  break;	    
+	      default:
+		  printf ("default\n");
+	      }
+      }  	
+      char *file_diff = argv[argc-1];
+      char *file_to_fix = argv[argc-2];      
+      FILE *file_differences = fopen( file_diff, "r");
+      FILE *file1 = fopen( file_to_fix, "r+");
       
       struct diff diff;
       int counter = 0;
@@ -20,10 +45,12 @@ int main(int argc, char **argv) {
       }      
       char line[64];
       while( fgets(line,sizeof(line),file_differences) != NULL ){
-	//printf("%s\n", line );
-	parsediff("byte 2 -98 +99", &diff);
+	parsediff(line, &diff);
 	fseek( file1, diff.offset-1, SEEK_SET );
 	fwrite( &diff.new, 1, 1, file1 );
+	if ( print ){
+	  printf("A change has been applied\n");
+	}
       }
       fclose(file_differences);
       fclose(file1);
