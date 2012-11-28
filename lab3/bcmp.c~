@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
       while(fread(&letter1, 1, 1, file1) & fread(&letter2, 1, 1, file2)) {
 	if ( ((letter1 != letter2) && number == 0 ) | ((letter1 != letter2) && number != 0 && counter < number )  ){  
 	  if ( print ){
-	    printf("byte %d -%d +%d\n",  counter+1, letter1, letter2 );
+	    printf("byte %d -%d +%d\n",  counter2+1, letter1, letter2 );
 	    counter++;
 	  }
 	}
