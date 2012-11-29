@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <assert.h>
 
+int cmpstr(char *str1, char *str2);
+
 int main(int argc, char **argv) {
 	int cmp;
 	char *rel;
