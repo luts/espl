@@ -7,7 +7,7 @@ bfix: bfix.o bfixAS.o diff.o
 	gcc -m32 -o bfix bfix.o bfixAS.o diff.o
 
 bcmp: bcmp.o bcmpAS.o
-	gcc -m32 -o bfix bcmp.o bcmpAS.o
+	gcc -m32 -o bcmp bcmp.o bcmpAS.o
 
 bfix.o: bfix.c diff.h
 	gcc -m32 -c bfix.c
