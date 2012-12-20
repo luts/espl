@@ -1,0 +1,19 @@
+#!/bin/sh
+
+file=$1
+counter=$2
+
+if [ ! -e $file ] ; then
+  echo "$0: Missing: $file" >&2
+  exit 1
+fi 
+
+
+while [ "$counter" -ne 1 ] ; do
+  mv $file.$(($counter - 1)) $file.$counter 2> /dev/null
+  $counter="$(( $counter - 1 ))"
+done
+
+mv $file $file.1
+
+exit 0
