@@ -1,0 +1,8 @@
+total 60
+-rw-r--r-- 1 barhay floppy   211 Dec 27 10:05 Makefile
+-rw-r--r-- 1 barhay floppy     0 Dec 27 11:49 a.txt
+-rw-r--r-- 1 barhay floppy    41 Dec 27 11:35 a.txt~
+-rwxr-xr-x 1 barhay floppy 22068 Dec 27 11:49 esplsh
+-rw-r--r-- 1 barhay floppy  3829 Dec 27 11:49 esplsh.c
+-rw-r--r-- 1 barhay floppy  3851 Dec 27 11:49 esplsh.c~
+-rw-r--r-- 1 barhay floppy 20400 Dec 27 11:49 esplsh.o
