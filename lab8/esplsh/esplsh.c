@@ -105,25 +105,56 @@ void run_program() {
   
   /* TODO: pipelines */
   /* TODO: background commands */
-   int i;
-   int child1;
-   int child2;
-   for ( i = 0; i < argc; i++)   {
-     if ( !strcmp(argv[i], "|") ){
-       child1=&argv;
-       child2=& argv[i+1];
-       argv[i] = NULL;
-     }
-   }
-   int fds[2];
-   pipe(fds);
-   
-  if((pid=fork())>0) {
+   //int i;
+   //int child1;
+   //int child2;
+   int flag = 0;
+   char **pointer = argv;
+   while (*pointer) {
+      // father code
+      if (**pointer == '|') {
+	flag = 1;
+	*pointer = NULL;
+	pointer = pointer + 1;
+	int pid;
+	int fd[2];
+	pipe(fd);
+	// Create the first child
+	pid = fork();
+	if ( pid == 0 ) {
+	  // close the input
+	  close( fd[0] );
+	  /* the child that write - open the output */
+	  dup2( fd[1] , 1);
+	  close( fd[1]);
+	  // execute to the process
+	  execvp( argv[0], argv );
+	} 
+	else {
+	  // Create the second child
+	  pid = fork();
+	  if ( pid == 0 ) {
+	    close( fd[1] );
+	    /* the child that read  - opent the input*/
+	    dup2( fd[0] , 0 );
+	    close( fd[0] );
+	    // execute to the process
+	    execvp(*pointer , pointer);
+	  }		
+	}
+	close( fd[1] );
+	close( fd[0] );
+	waitpid( pid, &status, 0 );
+      }
+      pointer = pointer + 1;
+  }
+  pid=fork();
+  if ( pid > 0 && flag != 0 ) {
     waitpid(pid, &status, 0);
     sprintf(ststr, "%d", status);
     setenv("?", ststr, 1);
     
-  } else if(pid==0) { 
+  } else if( pid == 0 && flag != 0) { 
     
     /*-------- input, output redirection ----------*/
     if (argc>=3 && !strcmp(argv[argc-2], ">") ){

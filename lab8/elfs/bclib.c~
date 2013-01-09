@@ -44,8 +44,8 @@ void bc_test() {
 	int bits[BC_NBITS] = {0, 0, 0, 0, 0, 1, 0, 0};
 
 	assert(bc_bits2char(bits)==' ');
-	//assert(char2char(0)==0);
-	//assert(char2char(' ')==' ');
+	assert(char2char(0)==0);
+	assert(char2char(' ')==' ');
 }
 
 int main() {
