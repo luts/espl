@@ -1,0 +1,6 @@
+total 8
+-rw-r--r-- 1 luts floppy    0 Jan 10 11:58 a.txt
+-rw-r--r-- 1 luts floppy    0 Jan 10 11:45 a.txt~
+-rw-r--r-- 1 luts floppy    0 Jan 10 11:40 b.txt
+-rwxr-xr-x 1 luts floppy 1632 Jan 10 11:57 pysh
+-rwxr-xr-x 1 luts floppy 1637 Jan 10 11:57 pysh~

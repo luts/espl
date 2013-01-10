@@ -1,0 +1,69 @@
+#!/usr/bin/env python
+
+import os, os.path, sys, getpass, shlex, subprocess
+
+
+home=os.getenv('HOME')
+
+def getcwd():
+    "like os.getcwd(), but collapses the home directory prefix into ~"
+    cwd = os.getcwd()
+    if cwd.startswith(home):
+        cwd = '~'+cwd[len(home):]
+    return cwd
+
+    
+    
+#subprocess.call(argv, *, stdin=in, stdout=out, stderr=None, shell=False)  
+def run_program():
+	if "|" in argv:
+	    split_index = argv.index("|") 
+	    #print (argv[0:split_index])
+	    #print (argv[split_index+1:len(argv)])
+	    p1 = subprocess.Popen(argv[0:split_index], stdout=subprocess.PIPE)
+	    p2 = subprocess.call(argv[split_index+1:len(argv)], stdin=p1.stdout)
+	    p1.stdout.close()  # Allow p1 to receive a SIGPIPE if p2 exits.
+	    #output = p2.communicate()[0]
+	    #print output
+	elif (argv[-2] == ">" ):
+	    file_output = open(argv[-1], 'w')
+	    subprocess.call(argv[0:-2], stdout=file_output)
+	elif (argv[-2] == "<" ):
+	    file_input = open(argv[-1], 'r')
+	    subprocess.call(argv[0:-2], stdin=file_input)  
+	else:
+	  subprocess.call(argv)
+	    
+	  
+
+while True:
+    print "%s@%s>" % (getpass.getuser(), getcwd()),
+
+    argv = None
+    try:
+        argv = shlex.split(raw_input())
+    except EOFError:
+        print
+        break                             # end of file from user, e.g. Ctrl-D
+
+    if not argv:
+        continue # empty command
+
+    if argv[0] in ['exit', 'quit', 'bye']:
+        break
+    elif argv[0]=='cd':
+        try:
+            os.chdir(os.path.expanduser(argv[1])) # expand ~ to home directory
+        except IndexError:                   # no arguments, chdir to home dir
+            os.chdir(home)
+        except OSError, s:
+            print >>sys.stderr, "chdir: %s" % s
+    else:
+        #print "TODO: execute %s" % ' '.join(argv)
+	run_program()
+
+# goodbye message
+goodbye = "have a good sunny day, see you back soon"
+print "*"+"-"*(len(goodbye)+2)+"*"
+print "| %s |" % goodbye
+print "*"+"-"*(len(goodbye)+2)+"*"
