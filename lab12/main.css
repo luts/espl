@@ -1,0 +1,16 @@
+body {
+   background-color: #e3e3e3;
+}
+p {
+    color:blue;
+}
+#login_form{
+  position: absolute;
+  right: 10px;
+  top:10px;
+  color: blue;
+}
+
+#pic:hover{
+  visibility:hidden;
+}

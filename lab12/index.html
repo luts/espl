@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+  	<link rel="stylesheet" type="text/css" href="main.css">
+  	<script src="functions.js" type="text/javascript"></script>
+ </head>
+
+ <body>
+  
+ <h1>My Name</h1>
+ ADD TEXT ABOUT YOURSELF
+<br><br><br><br> 
+ <div id=login_form>
+    <form name="myForm" method="POST">
+	  User name: <input id="username" type="text" name="username" value="" onkeyup="username_value();">
+	  Password: <input id="password" type="password" name="password" value="" onkeyup="password_value();"><br>
+	  Suggestions:
+	  <div id="txtHint"></div>
+	  <br><br>
+	  <img src="arrow_down.png" height=50 width=50 ><br>
+	  <input style="width:180px; height:30px;" type="button" value="Login here" type="button" value="Submit" onclick="validate_form()">
+    </form>  
+ </div>
+ <br><br><br><br>
+ <p id="after_submit"></p>
+ <br><br><br><br> 
+ Pass you mouse over the picture to get amuzed!
+ <div id="pic">
+    <img src="dog.jpg" height=250 width=250 >
+ </div>
+ 
+ <hr>
+ 
+ </body>
+ </html>
